@@ -8,24 +8,31 @@
 </head>
 <body>
 
-<div class="cover" id="cover">
-  <h1>Undangan Pernikahan</h1>
-  <p>Kepada Yth.</p>
-  <h2 id="guestName">Tamu Undangan</h2>
-  <button onclick="openInvitation()">Buka Undangan</button>
+<!-- Amplop -->
+<div class="envelope" id="envelope">
+  <div class="flap"></div>
+  <div class="letter">
+    <p>Kepada Yth.</p>
+    <h2 id="guestName">Tamu Undangan</h2>
+    <button onclick="openInvitation()">Buka Undangan</button>
+  </div>
 </div>
 
+<!-- Konten utama -->
 <div class="content" id="content">
-  <h1>Rina & Budi</h1>
-  <p>Akan melangsungkan pernikahan pada:</p>
+  <h1 class="fade">Rina & Budi</h1>
+  <p class="fade">Akan melangsungkan pernikahan pada:</p>
 
-  <h3>Minggu, 10 Oktober 2026</h3>
-  <p>Lokasi: Gedung Serbaguna</p>
+  <h3 class="fade">Minggu, 10 Oktober 2026</h3>
+  <p class="fade">Gedung Serbaguna</p>
 
-  <div id="countdown"></div>
+  <div id="countdown" class="fade"></div>
 
-  <p>Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+  <p class="fade">Merupakan suatu kehormatan bagi kami apabila Anda berkenan hadir.</p>
 </div>
+
+<!-- Container bunga -->
+<div id="petals"></div>
 
 <script src="script.js"></script>
 </body>
