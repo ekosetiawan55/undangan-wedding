@@ -1,14 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  window.openInvitation = function () {
-    const flap = document.querySelector(".flap");
+  const flap = document.getElementById("flap");
+  const envelope = document.getElementById("envelope");
+  const content = document.getElementById("content");
+
+  function openInvitation() {
     flap.style.transform = "rotateX(180deg)";
 
     setTimeout(() => {
-      document.getElementById("envelope").style.display = "none";
-      document.getElementById("content").style.display = "block";
+      envelope.style.display = "none";
+      content.style.display = "block";
     }, 1000);
-  };
+  }
+
+  // ✅ FIX UTAMA (support semua device)
+  flap.addEventListener("click", openInvitation);
+  flap.addEventListener("touchstart", openInvitation);
 
   /* Countdown */
   const countdownEl = document.getElementById("countdown");
@@ -29,26 +36,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const name = params.get("to");
 
   if (name) {
-    const guest = document.getElementById("guestName");
-    if (guest) guest.innerText = name;
+    document.getElementById("guestName").innerText = name;
   }
 
   /* Hujan bunga */
   function createPetal() {
-    const container = document.getElementById("petals");
-    if (!container) return;
-
     const petal = document.createElement("div");
     petal.classList.add("petal");
 
     petal.style.left = Math.random() * window.innerWidth + "px";
     petal.style.animationDuration = (3 + Math.random() * 5) + "s";
 
-    container.appendChild(petal);
+    document.getElementById("petals").appendChild(petal);
 
-    setTimeout(() => {
-      petal.remove();
-    }, 8000);
+    setTimeout(() => petal.remove(), 8000);
   }
 
   setInterval(createPetal, 300);
