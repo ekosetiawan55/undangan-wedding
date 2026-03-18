@@ -14,37 +14,35 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  cursor: pointer;
 }
 
 .flap {
-  width: 300px;
-  height: 150px;
+  width: 320px;
+  height: 160px;
   background: #d8b4a0;
   position: absolute;
-  top: calc(50% - 75px);
+  top: calc(50% - 80px);
   transform-origin: top;
   transition: 1s;
   z-index: 2;
+  pointer-events: none; /* FIX klik */
 }
 
 .letter {
-  width: 280px;
-  padding: 20px;
+  width: 300px;
+  padding: 25px;
   background: white;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 12px;
   z-index: 1;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-button {
-  padding: 10px 20px;
-  background: #c89f94;
-  border: none;
-  color: white;
-  border-radius: 6px;
+.click-text {
   margin-top: 10px;
+  font-size: 14px;
+  color: #999;
 }
 
 /* Konten */
@@ -66,6 +64,7 @@ button {
 .fade:nth-child(2) { animation-delay: 1s; }
 .fade:nth-child(3) { animation-delay: 1.5s; }
 .fade:nth-child(4) { animation-delay: 2s; }
+.fade:nth-child(5) { animation-delay: 2.5s; }
 
 /* Keyframes */
 @keyframes fadeUp {
