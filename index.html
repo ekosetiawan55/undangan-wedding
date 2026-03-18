@@ -8,18 +8,24 @@
 </head>
 <body>
 
-<!-- Nama tamu di luar -->
+<!-- Nama tamu -->
 <div class="guest-container">
   <p>Kepada Yth.</p>
   <h2 id="guestName">Tamu Undangan</h2>
 </div>
 
 <!-- Amplop -->
-<div class="envelope" id="envelope" onclick="openInvitation()">
-  <div class="flap"></div>
-  <div class="letter">
-    <p class="click-text">Klik untuk membuka undangan</p>
+<div class="envelope" id="envelope">
+
+  <!-- Tombol di flap -->
+  <div class="flap" onclick="openInvitation()">
+    <span class="open-text">Buka Undangan</span>
   </div>
+
+  <div class="letter">
+    <p class="hint-text">Sentuh penutup untuk membuka</p>
+  </div>
+
 </div>
 
 <!-- Konten -->
