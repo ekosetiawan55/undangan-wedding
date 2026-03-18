@@ -1,45 +1,57 @@
-function openInvitation() {
-  const flap = document.querySelector(".flap");
-  flap.style.transform = "rotateX(180deg)";
+// Tunggu semua HTML siap
+document.addEventListener("DOMContentLoaded", function () {
 
-  setTimeout(() => {
-    document.getElementById("envelope").style.display = "none";
-    document.getElementById("content").style.display = "block";
+  window.openInvitation = function () {
+    const flap = document.querySelector(".flap");
+    flap.style.transform = "rotateX(180deg)";
+
+    setTimeout(() => {
+      document.getElementById("envelope").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }, 1000);
+  };
+
+  /* Countdown aman */
+  const countdownEl = document.getElementById("countdown");
+  const eventDate = new Date("Oct 10, 2026 10:00:00").getTime();
+
+  setInterval(function () {
+    if (!countdownEl) return;
+
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    countdownEl.innerHTML = days + " hari lagi";
   }, 1000);
-}
 
-/* Countdown */
-const eventDate = new Date("Oct 10, 2026 10:00:00").getTime();
+  /* Nama tamu */
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("to");
 
-setInterval(function () {
-  const now = new Date().getTime();
-  const distance = eventDate - now;
+  if (name) {
+    const guest = document.getElementById("guestName");
+    if (guest) guest.innerText = name;
+  }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  document.getElementById("countdown").innerHTML = days + " hari lagi";
-}, 1000);
+  /* Hujan bunga */
+  function createPetal() {
+    const container = document.getElementById("petals");
+    if (!container) return;
 
-/* Nama tamu dari URL */
-const params = new URLSearchParams(window.location.search);
-const name = params.get("to");
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
 
-if (name) {
-  document.getElementById("guestName").innerText = name;
-}
+    petal.style.left = Math.random() * window.innerWidth + "px";
+    petal.style.animationDuration = (3 + Math.random() * 5) + "s";
 
-/* Hujan bunga */
-function createPetal() {
-  const petal = document.createElement("div");
-  petal.classList.add("petal");
+    container.appendChild(petal);
 
-  petal.style.left = Math.random() * window.innerWidth + "px";
-  petal.style.animationDuration = (3 + Math.random() * 5) + "s";
+    setTimeout(() => {
+      petal.remove();
+    }, 8000);
+  }
 
-  document.getElementById("petals").appendChild(petal);
+  setInterval(createPetal, 300);
 
-  setTimeout(() => {
-    petal.remove();
-  }, 8000);
-}
-
-setInterval(createPetal, 300);
+});
