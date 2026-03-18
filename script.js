@@ -1,21 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   const flap = document.getElementById("flap");
+  const letter = document.getElementById("letter");
   const envelope = document.getElementById("envelope");
   const content = document.getElementById("content");
 
   function openInvitation() {
+    // buka flap
     flap.style.transform = "rotateX(180deg)";
 
+    // surat keluar
+    setTimeout(() => {
+      letter.classList.add("open");
+    }, 500);
+
+    // tampilkan konten
     setTimeout(() => {
       envelope.style.display = "none";
       content.style.display = "block";
-    }, 1000);
+    }, 2000);
   }
 
-  // ✅ FIX UTAMA (support semua device)
   flap.addEventListener("click", openInvitation);
   flap.addEventListener("touchstart", openInvitation);
+
+  /* Nama tamu */
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("to");
+  if (name) {
+    document.getElementById("guestName").innerText = name;
+  }
 
   /* Countdown */
   const countdownEl = document.getElementById("countdown");
@@ -30,14 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     countdownEl.innerHTML = days + " hari lagi";
   }, 1000);
-
-  /* Nama tamu */
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get("to");
-
-  if (name) {
-    document.getElementById("guestName").innerText = name;
-  }
 
   /* Hujan bunga */
   function createPetal() {
