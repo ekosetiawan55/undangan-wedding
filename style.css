@@ -11,15 +11,6 @@ body {
   margin-top: 40px;
 }
 
-.guest-container p {
-  margin: 0;
-  color: #666;
-}
-
-.guest-container h2 {
-  margin: 5px 0 20px;
-}
-
 /* Amplop */
 .envelope {
   width: 100%;
@@ -30,7 +21,7 @@ body {
   position: relative;
 }
 
-/* FLAP (penutup) */
+/* FLAP */
 .flap {
   width: 320px;
   height: 160px;
@@ -39,21 +30,20 @@ body {
   top: calc(50% - 80px);
   transform-origin: top;
   transition: 1s;
-  z-index: 3;
+  z-index: 10;
   cursor: pointer;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* FIX penting mobile */
+  touch-action: manipulation;
 }
 
-/* Tulisan di flap */
 .open-text {
   color: white;
   font-weight: bold;
-  background: rgba(0,0,0,0.2);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 14px;
 }
 
 /* Surat */
@@ -64,12 +54,6 @@ body {
   text-align: center;
   border-radius: 12px;
   z-index: 1;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-.hint-text {
-  font-size: 13px;
-  color: #999;
 }
 
 /* Konten */
@@ -77,32 +61,6 @@ body {
   display: none;
   padding: 40px;
   text-align: center;
-  animation: fadeIn 2s ease forwards;
-}
-
-/* Animasi */
-.fade {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1s forwards;
-}
-
-.fade:nth-child(1) { animation-delay: 0.5s; }
-.fade:nth-child(2) { animation-delay: 1s; }
-.fade:nth-child(3) { animation-delay: 1.5s; }
-.fade:nth-child(4) { animation-delay: 2s; }
-.fade:nth-child(5) { animation-delay: 2.5s; }
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
 }
 
 /* Hujan bunga */
