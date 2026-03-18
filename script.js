@@ -1,4 +1,3 @@
-// Tunggu semua HTML siap
 document.addEventListener("DOMContentLoaded", function () {
 
   window.openInvitation = function () {
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   };
 
-  /* Countdown aman */
+  /* Countdown */
   const countdownEl = document.getElementById("countdown");
   const eventDate = new Date("Oct 10, 2026 10:00:00").getTime();
 
