@@ -1,49 +1,181 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    
+    <!-- Tailwind CSS (Via CDN untuk kemudahan) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        'gold-light': '#F4E5B0',
+                        cream: '#FFFDD0',
+                        dark: '#2C2C2C'
+                    },
+                    fontFamily: {
+                        elegant: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Cinzel"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="font-sans text-dark overflow-x-hidden bg-cream">
 
-<!-- Nama tamu -->
-<div class="guest-container">
-  <p>Kepada Yth.</p>
-  <h2 id="guestName">Tamu Undangan</h2>
-</div>
+    <!-- Audio Element -->
+    <audio id="wedding-audio" loop></audio>
 
-<!-- Amplop -->
-<div class="envelope" id="envelope">
+    <!-- Floating Music Button -->
+    <button id="music-icon" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-50 bg-gold text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300 border-2 border-white">
+        🔇
+    </button>
 
-  <div class="flap" id="flap">
-    <span class="open-text">Buka Undangan</span>
-  </div>
+    <!-- Landing Page (Cover) -->
+    <div id="landing" class="fixed inset-0 z-40 flex flex-col items-center justify-center text-center text-white transition-transform duration-1000 ease-in-out" style="background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        
+        <div class="relative z-10 p-6 animate-fade-in-up">
+            <p class="text-lg md:text-xl tracking-widest uppercase mb-4 font-light">The Wedding of</p>
+            <h1 id="landing-names" class="font-elegant text-5xl md:text-7xl text-gold mb-6 drop-shadow-md">Loading...</h1>
+            
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 mt-8 max-w-md mx-auto">
+                <p id="personalized-to" class="text-sm md:text-base font-semibold mb-4">Kepada Yth. Tamu Undangan</p>
+                <button onclick="startInvitation()" class="bg-gold hover:bg-yellow-600 text-white px-8 py-3 rounded-full font-bold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2 mx-auto">
+                    <span>Buka Undangan</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" /></svg>
+                </button>
+            </div>
+        </div>
+    </div>
 
-  <!-- Surat (akan keluar) -->
-  <div class="letter" id="letter">
-    <h3>Undangan Pernikahan</h3>
-    <p>Rina & Budi</p>
-  </div>
+    <!-- Main Content -->
+    <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000 relative" style="background-size: cover; background-attachment: fixed; background-position: center;">
+        <div class="absolute inset-0 bg-cream/90"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 py-12 space-y-24">
 
-</div>
+            <!-- Hero Section -->
+            <section id="home" class="text-center pt-10">
+                <p class="text-gold font-bold tracking-widest uppercase mb-2" data-aos="fade-down">We Are Getting Married</p>
+                <h2 id="home-short-name" class="font-elegant text-6xl md:text-8xl text-dark mb-6" data-aos="zoom-in">Couple Name</h2>
+                <p class="text-gray-600 italic max-w-lg mx-auto" data-aos="fade-up">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."</p>
+            </section>
 
-<!-- Konten utama -->
-<div class="content" id="content">
-  <h1 class="fade">Rina & Budi</h1>
-  <p class="fade">Akan melangsungkan pernikahan pada:</p>
+            <!-- Mempelai Section -->
+            <section id="couple" class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Pria -->
+                <div class="text-center order-2 md:order-1" data-aos="fade-right">
+                    <img id="foto-pria" src="" alt="Groom" class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full mx-auto border-4 border-gold shadow-xl mb-6">
+                    <h3 id="nama-pria" class="font-elegant text-4xl text-gold mb-2">Nama Pria</h3>
+                    <p class="text-sm text-gray-500">Putra dari Bpk. <span id="ortu-pria"></span></p>
+                </div>
 
-  <h3 class="fade">Minggu, 10 Oktober 2026</h3>
-  <p class="fade">Gedung Serbaguna</p>
+                <div class="text-center order-1 md:order-2" data-aos="fade-left">
+                    <div class="font-elegant text-6xl text-gold/50">&</div>
+                </div>
 
-  <div id="countdown" class="fade"></div>
+                <!-- Wanita -->
+                <div class="text-center order-3" data-aos="fade-left">
+                    <img id="foto-wanita" src="" alt="Bride" class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full mx-auto border-4 border-gold shadow-xl mb-6">
+                    <h3 id="nama-wanita" class="font-elegant text-4xl text-gold mb-2">Nama Wanita</h3>
+                    <p class="text-sm text-gray-500">Putri dari Bpk. <span id="ortu-wanita"></span></p>
+                </div>
+            </section>
 
-  <p class="fade">Merupakan suatu kehormatan bagi kami apabila Anda berkenan hadir.</p>
-</div>
+            <!-- Hadis Section -->
+            <section class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-gold text-center" data-aos="flip-up">
+                <p id="hadis-text" class="font-serif italic text-gray-700 leading-relaxed">Loading Hadis...</p>
+            </section>
 
-<div id="petals"></div>
+            <!-- Story Section -->
+            <section id="story">
+                <h2 class="text-center font-elegant text-5xl text-gold mb-12" data-aos="fade-down">Our Love Story</h2>
+                <div id="story-container" class="space-y-8">
+                    <!-- Items injected by JS -->
+                </div>
+            </section>
 
-<script src="script.js"></script>
+            <!-- Event & Countdown Section -->
+            <section id="events" class="text-center">
+                <h2 class="font-elegant text-5xl text-gold mb-8" data-aos="fade-down">Save The Date</h2>
+                
+                <!-- Countdown -->
+                <div class="flex justify-center gap-4 md:gap-8 mb-12" data-aos="zoom-in">
+                    <div class="bg-white p-4 rounded-xl shadow-md min-w-[80px]">
+                        <span id="days" class="block text-3xl font-bold text-gold">00</span>
+                        <span class="text-xs uppercase">Hari</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-md min-w-[80px]">
+                        <span id="hours" class="block text-3xl font-bold text-gold">00</span>
+                        <span class="text-xs uppercase">Jam</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-md min-w-[80px]">
+                        <span id="minutes" class="block text-3xl font-bold text-gold">00</span>
+                        <span class="text-xs uppercase">Menit</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-md min-w-[80px]">
+                        <span id="seconds" class="block text-3xl font-bold text-gold">00</span>
+                        <span class="text-xs uppercase">Detik</span>
+                    </div>
+                </div>
+
+                <div id="events-container" class="grid md:grid-cols-2 gap-8">
+                    <!-- Events injected by JS -->
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section id="gallery">
+                <h2 class="text-center font-elegant text-5xl text-gold mb-8" data-aos="fade-down">Gallery</h2>
+                <div id="gallery-slider" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 hide-scrollbar">
+                    <!-- Images injected by JS -->
+                </div>
+            </section>
+
+            <!-- Gifts Section -->
+            <section id="gifts">
+                <h2 class="text-center font-elegant text-5xl text-gold mb-8" data-aos="fade-down">Wedding Gift</h2>
+                <p class="text-center text-gray-600 mb-8">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.</p>
+                <div id="gifts-container" class="grid md:grid-cols-2 gap-6">
+                    <!-- Gifts injected by JS -->
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center pb-12 border-t border-gold/20 pt-12">
+                <h2 id="footer-couple-name" class="font-elegant text-4xl text-gold mb-4">Couple Name</h2>
+                <p class="text-sm text-gray-500 mb-6">Terima kasih atas doa dan restu Anda</p>
+                <a id="tiktok-link" href="#" target="_blank" class="inline-block bg-black text-white px-6 py-2 rounded-full text-sm hover:bg-gray-800 transition">
+                    Follow Our TikTok
+                </a>
+                <p class="mt-8 text-xs text-gray-400">Made with ❤️ for our special day</p>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
