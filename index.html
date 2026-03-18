@@ -9,16 +9,16 @@
 <body>
 
 <!-- Amplop -->
-<div class="envelope" id="envelope">
+<div class="envelope" id="envelope" onclick="openInvitation()">
   <div class="flap"></div>
   <div class="letter">
     <p>Kepada Yth.</p>
     <h2 id="guestName">Tamu Undangan</h2>
-    <button onclick="openInvitation()">Buka Undangan</button>
+    <p class="click-text">Klik untuk membuka</p>
   </div>
 </div>
 
-<!-- Konten utama -->
+<!-- Konten -->
 <div class="content" id="content">
   <h1 class="fade">Rina & Budi</h1>
   <p class="fade">Akan melangsungkan pernikahan pada:</p>
@@ -31,7 +31,7 @@
   <p class="fade">Merupakan suatu kehormatan bagi kami apabila Anda berkenan hadir.</p>
 </div>
 
-<!-- Container bunga -->
+<!-- Hujan bunga -->
 <div id="petals"></div>
 
 <script src="script.js"></script>
